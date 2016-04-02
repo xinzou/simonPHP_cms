@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="simon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CMS</title>
+    <link href="http://dev.cms.com/assets/website/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://dev.cms.com/assets/website/css/font-awesome.css">
+    <link rel="stylesheet" href="http://dev.cms.com/assets/website/css/index.css">
+
+    <style type="text/css">
+        body { padding-top: 50px; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">cms</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">cms</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                                    <li><a href="/static/category/9.html">行业前景</a></li>
+                                    <li><a href="/static/category/10.html">开店步骤</a></li>
+                                    <li><a href="/static/category/11.html">成功案例</a></li>
+                            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>    <div class="jumbotron">
+        <h1>mysql中using的用法</h1><br/>
+        <p><i class="icon-calendar icon-x"></i> 2015-12-24 10:56:16</p>
+        <p></p>
+    </div>
+    <div class="container col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row" style="padding: 10px 40px 10px 5px;font-size: 14px;">
+                    <p>
+                                        <h1>mysql中using的用法</h1>
+<p>在sql进行关联查询join的时候，我们通常使用on作为条件查询，但是在关联的两张表中我们还有一种更简洁的写法，那就是using。</p>
+<p>举例如下：</p>
+<p>user表：</p>
+<pre class="language-php"><code>CREATE TABLE `user` (<br />  `user_id` int(11) NOT NULL AUTO_INCREMENT,<br />  `username` varchar(200) NOT NULL COMMENT '账号',<br />  `password` varchar(100) NOT NULL COMMENT '密码',<br />  `salt` varchar(45) NOT NULL COMMENT '盐',<br />  `truename` varchar(200) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '姓名',<br />  `email` varchar(40) DEFAULT NULL COMMENT '邮箱',<br />  `mobile` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '移动电话',<br />  `landline` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '固定电话',<br />  `ext` varchar(45) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '分机号',<br />  `role_id` int(11) NOT NULL DEFAULT '0' COMMENT '角色ID',<br />  `remember_token` varchar(50) NOT NULL,<br />  `status` enum('normal','locked') NOT NULL DEFAULT 'normal',<br />  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,<br />  `googleauthenticatorsecret` varchar(100) NOT NULL COMMENT 'GoogleAuthenticator',<br />  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',<br />  PRIMARY KEY (`user_id`),<br />  UNIQUE KEY `user_id_UNIQUE` (`user_id`),<br />  UNIQUE KEY `username_UNIQUE` (`username`)<br />) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;<br /></code></pre>
+<p>article表：</p>
+<pre class="language-php"><code>CREATE TABLE `article` (<br />  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,<br />  `cate_id` int(11) NOT NULL,<br />  `user_id` int(11) NOT NULL,<br />  `title` varchar(255) COLLATE utf8_bin NOT NULL,<br />  `content` text COLLATE utf8_bin NOT NULL,<br />  `tags` varchar(255) COLLATE utf8_bin DEFAULT NULL,<br />  `created_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',<br />  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',<br />  `pic` varchar(255) COLLATE utf8_bin DEFAULT '',<br />  PRIMARY KEY (`id`),<br />  UNIQUE KEY `article_title_unique` (`title`)<br />) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;<br /></code></pre>
+<p>通常我们查询会使用</p>
+<p>select * from article join user on article.user_id=user.user_id;//使用on建立关联关系</p>
+<p>基于这种情况我们可以使用using</p>
+<p>select * from article join user using(user_id);//使用using建立关联关系</p>
+<p>注意：<strong>using</strong>只能在两张表需要关联的字段<strong>相同</strong>时使用，如果关联字段不同，那么就只能使用<strong>on</strong>。</p>
+<p>&nbsp;</p>
+                                        </p>
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+                    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{},"image":{"viewList":["qzone","tsina","tqq","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tsina","tqq","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<footer class="container" style="margin-top: 20px;">
+    <div class="col-xs-4 col-md-offset-4">
+        <address style="padding-left: 5px;text-align: center;">
+            © 2015
+            <strong>
+                xinzou.net
+                <a href="https://github.com/xinzou" target="_blank" aria-label="view source code">
+                    <i class="icon-github  icon-2x"></i>
+                </a>
+            </strong><br>
+            <a href="javascript:window.scrollTo(0,0)">TOP</a>
+        </address>
+    </div>
+</footer><script src="http://dev.cms.com/assets/website/js/jquery-2.0.3.min.js"></script>
+<script src="http://dev.cms.com/assets/website/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+   		$(document).ready(function(){ 
+   		    $.get("http://dev.cms.com/article/count", { id: 9 } );
+    	}); 
+	</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{% extends "admin/layouts/master.twig" %}
+{% block title %}新增文章{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- left, vertical navbar & content -->
+        <div class="row">
+            <!-- left, vertical navbar -->
+            {% include 'admin/layouts/left.twig' %}
+                    <!-- content -->
+            <div class="col-md-10">
+                <button type="button" id="myButton" data-loading-text="Loading..." class="btn btn-primary" autocomplete="off">
+				 	一键刷新静态缓存
+				</button>
+				
+				<script>
+				  $('#myButton').on('click', function () {
+				    var $btn = $(this).button('loading')
+				    $.post("{{ siteUrl('/admin/setNewStatic') }}", function(data){
+					    $btn.button('reset')
+			        });
+				  })
+				</script>
+            </div>
+        </div>
+    </div>
+{% endblock %}

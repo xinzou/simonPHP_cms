@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="author" content="simon">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}CMS{% endblock %}</title>
+    <link href="{{ baseUrl() }}/assets/website/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ baseUrl() }}/assets/website/css/font-awesome.css">
+    <link rel="stylesheet" href="{{ baseUrl() }}/assets/website/css/index.css">
+
+    <style type="text/css">
+        body { padding-top: 50px; }
+    </style>
+</head>
+<body>
+
+{% include 'website/layouts/nav.twig' %}
+{% block content %}
+{% endblock %}
+{% include 'website/layouts/footer.twig' %}
+<script src="{{ baseUrl() }}/assets/website/js/jquery-2.0.3.min.js"></script>
+<script src="{{ baseUrl() }}/assets/website/js/bootstrap.min.js"></script>
+{% block count %}
+{% endblock %}
+</body>
+</html>

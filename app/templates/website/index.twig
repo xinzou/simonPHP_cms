@@ -1,0 +1,32 @@
+{% extends "website/layouts/master.twig" %}
+{% block content %}
+	<link rel="stylesheet" media="screen" href="{{ baseUrl() }}/assets/website/css/index.css">
+    <div class="container col-xs-offset-1">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="row" style="padding: 10px 40px 10px 5px;font-size: 14px;">
+                    <ul>
+                    	<li style="border-bottom: 1px solid #eee;padding-top: 20px;">当前位置：首页 </li>
+                    	{% for article in articleList %}
+	                        <li style="border-bottom: 1px solid #eee;padding: 20px 0px 10px 0px;">
+	                        	<div class="row">
+	                        		<div class="col-xs-2">
+	                        			<img src="{{baseUrl()}}{{article.pic}}" width="180px" height="132px" />
+                        			</div>
+	                        		<div class="col-xs-10">
+	                        			<h3 style="margin-top: 0px;margin-bottom: 2px;"><a style="color:blue" href="/static/articles/article_{{article.id}}.html">{{ article.title }}</a></h3>
+	                        			<p class="keys"><b>关键词：{{ article.tags }}</b>日期：{{ article.created_at }}   被围观：{{ article.num }}</p>
+	                        			<p>{{article.intro}}   <a style="color:blue" href="/static/articles/article_{{article.id}}.html">详细</a></p>
+	                        		</div>
+	                        	</div>
+	                        </li>
+                    	{% endfor %}
+                    </ul>
+                    {% autoescape true %}
+                    {{ page|raw }}
+                    {% endautoescape %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

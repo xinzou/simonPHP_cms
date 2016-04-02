@@ -1,0 +1,53 @@
+{% extends "admin/layouts/master.twig" %}
+{% block title %}新增文章分类{% endblock %}
+{% block content %}
+    <div class="container">
+        <!-- left, vertical navbar & content -->
+        <div class="row">
+            <!-- left, vertical navbar -->
+            {% include 'admin/layouts/left.twig' %}
+                    <!-- content -->
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="page-header">
+                            <h1>新增文章分类</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default bootstrap-admin-no-table-panel">
+                            <div class="panel-heading">
+                                <div class="text-muted bootstrap-admin-box-title">文章分类</div>
+                            </div>
+                            <div class="bootstrap-admin-no-table-panel-content bootstrap-admin-panel-content collapse in">
+                                <form class="form-horizontal" action="{{ siteUrl('admin/category/store') }}" method="post">
+                                    <fieldset>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label" for="cate_name">分类名称</label>
+                                            <div class="col-lg-4">
+                                                <input class="form-control" id="cate_name" name="cate_name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-lg-2 control-label" for="as_name">别名</label>
+                                            <div class="col-lg-4">
+                                                <input class="form-control" id="as_name" name="as_name" type="text">
+                                            </div>
+                                        </div>
+                                        <div style="padding-left:90px;">
+                                            <button type="submit" class="btn btn-primary">保存</button>
+                                            <button type="reset" class="btn btn-default">取消</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
